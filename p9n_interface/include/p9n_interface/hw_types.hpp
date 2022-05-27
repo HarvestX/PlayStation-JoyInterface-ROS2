@@ -15,6 +15,7 @@
 #pragma once
 
 #include <string>
+#include <sstream>
 
 namespace p9n_interface
 {
@@ -25,17 +26,10 @@ enum class HW_TYPE
   DUALSENSE,
 };
 
-std::string getHWName(const HW_TYPE & hw_type)
+namespace HW_NAME
 {
-  switch (hw_type) {
-    case HW_TYPE::DUALSHOCK3:
-      return "DualShock3";
-    case HW_TYPE::DUALSHOCK4:
-      return "DualShock4";
-    case HW_TYPE::DUALSENSE:
-      return "DualSense";
-    default:
-      return "Unknown";
-  }
-}
+const char DUALSHOCK3[] = "DualShock3";
+const char DUALSHOCK4[] = "DualShock4";
+const char DUALSENSE[] = "Dualsense";
+}  // namespace HW_NAME
 }  // namespace p9n_interface

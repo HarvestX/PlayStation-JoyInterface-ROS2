@@ -40,6 +40,11 @@ typedef struct
   size_t select;
   size_t start;
   size_t PS;
+
+  size_t dpad_up;
+  size_t dpad_down;
+  size_t dpad_right;
+  size_t dpad_left;
 } JoyButtonIdx;
 
 typedef struct
@@ -56,11 +61,15 @@ typedef struct
   size_t L2_analog;
 } JoyAxesIdx;
 
+std::string getAllHwName();
+std::string getHwName(const HW_TYPE &);
+HW_TYPE getHwType(const std::string & hw_name);
+
 class PlayStationInterface
 {
 private:
   HW_TYPE HW_TYPE_;
-  sensor_msgs::msg::Joy::UniquePtr joy_;
+  sensor_msgs::msg::Joy::ConstSharedPtr joy_;
   const rclcpp::Logger LOGGER_;
   std::unique_ptr<JoyButtonIdx> btn_idx_;
   std::unique_ptr<JoyAxesIdx> axes_idx_;
@@ -70,7 +79,9 @@ private:
 
 public:
   explicit PlayStationInterface(const HW_TYPE);
-  void setJoyMsg(sensor_msgs::msg::Joy::UniquePtr);
+  void setJoyMsg(sensor_msgs::msg::Joy::ConstSharedPtr);
+
+  bool pressedAny();
 
   bool pressedSquare();
   bool pressedCircle();
@@ -85,6 +96,11 @@ public:
   bool pressedSelect();
   bool pressedStart();
   bool pressedPS();
+
+  bool pressedDPadUp();
+  bool pressedDPadDown();
+  bool pressedDPadLeft();
+  bool pressedDPadRight();
 
   float pressedDPadX();
   float pressedDPadY();
