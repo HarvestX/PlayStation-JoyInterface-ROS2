@@ -16,6 +16,43 @@
 
 namespace p9n_interface
 {
+
+std::string getAllHwName()
+{
+  std::stringstream ss;
+  ss << HW_NAME::DUALSHOCK3 << ", ";
+  ss << HW_NAME::DUALSHOCK4 << ", ";
+  ss << HW_NAME::DUALSENSE;
+  return ss.str();
+}
+
+std::string getHwName(const HW_TYPE & hw_type)
+{
+  switch (hw_type) {
+    case HW_TYPE::DUALSHOCK3:
+      return HW_NAME::DUALSHOCK3;
+    case HW_TYPE::DUALSHOCK4:
+      return HW_NAME::DUALSHOCK4;
+    case HW_TYPE::DUALSENSE:
+      return HW_NAME::DUALSENSE;
+    default:
+      throw std::runtime_error("Invalid hardware type.");
+  }
+}
+
+HW_TYPE getHwType(const std::string & hw_name)
+{
+  if (hw_name == HW_NAME::DUALSHOCK3) {
+    return HW_TYPE::DUALSHOCK3;
+  } else if (hw_name == HW_NAME::DUALSHOCK4) {
+    return HW_TYPE::DUALSHOCK4;
+  } else if (hw_name == HW_NAME::DUALSENSE) {
+    return HW_TYPE::DUALSENSE;
+  }
+  throw std::runtime_error("Invalid hardware name: " + hw_name);
+}
+
+
 PlayStationInterface::PlayStationInterface(
   const HW_TYPE type
 )
@@ -24,8 +61,8 @@ PlayStationInterface::PlayStationInterface(
 {
   RCLCPP_INFO(
     this->LOGGER_,
-    "Hardware Type: %s",
-    getHWName(type).c_str());
+    "Hardware: %s",
+    getHwName(this->HW_TYPE_).c_str());
 
   this->btn_idx_ = std::make_unique<JoyButtonIdx>();
   this->axes_idx_ = std::make_unique<JoyAxesIdx>();
@@ -101,9 +138,29 @@ bool PlayStationInterface::isAvailable()
   return false;
 }
 
-void PlayStationInterface::setJoyMsg(sensor_msgs::msg::Joy::UniquePtr msg)
+void PlayStationInterface::setJoyMsg(sensor_msgs::msg::Joy::ConstSharedPtr msg)
 {
-  this->joy_ = std::move(msg);
+  this->joy_ = msg;
+}
+
+bool PlayStationInterface::pressedAny()
+{
+  if (!this->isAvailable()) {
+    return false;
+  }
+
+  bool pressed = false;
+  for (auto btn : this->joy_->buttons) {
+    pressed |= btn;
+  }
+  for (size_t i = 0; i < this->joy_->axes.size(); ++i) {
+    if (i == this->axes_idx_->L2_analog || i == this->axes_idx_->R2_analog) {
+      pressed |= this->joy_->axes.at(i) < 0.0;
+      continue;
+    }
+    pressed |= std::abs(this->joy_->axes.at(i)) > 1e-1;
+  }
+  return pressed;
 }
 
 bool PlayStationInterface::pressedSquare()
@@ -205,13 +262,47 @@ bool PlayStationInterface::pressedPS()
     this->btn_idx_->PS);
 }
 
+bool PlayStationInterface::pressedDPadUp()
+{
+  return this->pressedDPadY() == 1.0;
+}
+
+bool PlayStationInterface::pressedDPadDown()
+{
+  return this->pressedDPadY() == -1.0;
+}
+
+bool PlayStationInterface::pressedDPadRight()
+{
+  return this->pressedDPadX() == -1.0;
+}
+
+bool PlayStationInterface::pressedDPadLeft()
+{
+  return this->pressedDPadX() == 1.0;
+}
+
 float PlayStationInterface::pressedDPadX()
 {
   if (!this->isAvailable()) {
     return false;
   }
-  return this->joy_->axes.at(
-    this->axes_idx_->d_pad_x);
+  switch (this->HW_TYPE_) {
+    case HW_TYPE::DUALSHOCK3:
+      if (this->joy_->buttons.at(this->btn_idx_->dpad_up)) {
+        return 1.0;
+      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_down)) {
+        return -1.0;
+      } else {
+        return 0.0;
+      }
+    case HW_TYPE::DUALSHOCK4:
+    case HW_TYPE::DUALSENSE:
+      return this->joy_->axes.at(
+        this->axes_idx_->d_pad_x);
+    default:
+      throw std::runtime_error("Invalid hardware type");
+  }
 }
 
 float PlayStationInterface::pressedDPadY()
@@ -219,8 +310,22 @@ float PlayStationInterface::pressedDPadY()
   if (!this->isAvailable()) {
     return false;
   }
-  return this->joy_->axes.at(
-    this->axes_idx_->d_pad_y);
+  switch (this->HW_TYPE_) {
+    case HW_TYPE::DUALSHOCK3:
+      if (this->joy_->buttons.at(this->btn_idx_->dpad_right)) {
+        return -1.0;
+      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_left)) {
+        return 1.0;
+      } else {
+        return 0.0;
+      }
+    case HW_TYPE::DUALSHOCK4:
+    case HW_TYPE::DUALSENSE:
+      return this->joy_->axes.at(
+        this->axes_idx_->d_pad_y);
+    default:
+      throw std::runtime_error("Invalid hardware type");
+  }
 }
 
 float PlayStationInterface::tiltedStickLX()
