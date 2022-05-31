@@ -13,12 +13,24 @@
 # limitations under the License.
 
 from launch import LaunchDescription
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import (
+    TextSubstitution,
+    LaunchConfiguration,
+)
+
 from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 
 
 def generate_launch_description():
     """Generate launch description."""
+    launch_args = [
+        DeclareLaunchArgument(
+            'hw_type',
+            default_value=TextSubstitution(text='Dualsense')
+        )
+    ]
     nodes = [
         ComposableNodeContainer(
             name='joy_container',
@@ -34,8 +46,11 @@ def generate_launch_description():
                 ComposableNode(
                     package='p9n_test',
                     plugin='p9n_test::PlayStationTestNode',
-                    name='p9n_test'
+                    name='p9n_test',
+                    parameters=[{
+                        'hw_type': LaunchConfiguration('hw_type')
+                    }]
                 ),
             ])]
 
-    return LaunchDescription(nodes)
+    return LaunchDescription(launch_args + nodes)

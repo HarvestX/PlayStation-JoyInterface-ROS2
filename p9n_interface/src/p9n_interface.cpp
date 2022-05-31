@@ -69,9 +69,9 @@ PlayStationInterface::PlayStationInterface(
 
   switch (this->HW_TYPE_) {
     case HW_TYPE::DUALSHOCK3:
-      throw std::runtime_error("Not supported yet.");
+      throw std::runtime_error("DualShock3 not supported yet.");
     case HW_TYPE::DUALSHOCK4:
-      throw std::runtime_error("Not supported yet.");
+      throw std::runtime_error("DualShock4 not supported yet.");
     case HW_TYPE::DUALSENSE:
       {
         using BTN_IDX = BUTTONS_DUALSENSE;

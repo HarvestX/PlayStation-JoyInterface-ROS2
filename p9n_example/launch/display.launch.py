@@ -13,12 +13,24 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch_ros.actions import ComposableNodeContainer, Node
+from launch.actions import DeclareLaunchArgument
+from launch.substitutions import (
+    TextSubstitution,
+    LaunchConfiguration,
+)
+
+from launch_ros.actions import ComposableNodeContainer
 from launch_ros.descriptions import ComposableNode
 
 
 def generate_launch_description():
     """Generate launch description."""
+    launch_args = [
+        DeclareLaunchArgument(
+            'hw_type',
+            default_value=TextSubstitution(text='Dualsense')
+        )
+    ]
     nodes = [
         ComposableNodeContainer(
             name='joy_container',
@@ -31,11 +43,15 @@ def generate_launch_description():
                     plugin='joy::Joy',
                     name='joy',
                 ),
+                ComposableNode(
+                    package='p9n_example',
+                    plugin='p9n_example::DisplayNode',
+                    name='display_node',
+                    parameters=[{
+                        'hw_type': LaunchConfiguration('hw_type')
+                    }]
+                )
             ]),
-        Node(
-            name='display_node',
-            package='p9n_example',
-            executable='display_node_exec'),
     ]
 
-    return LaunchDescription(nodes)
+    return LaunchDescription(launch_args + nodes)
