@@ -23,7 +23,7 @@ DisplayNode::DisplayNode(const rclcpp::NodeOptions & options)
 {
 
   const std::string hw_name = this->declare_parameter<std::string>(
-    "controller_type", p9n_interface::HW_NAME::DUALSENSE);
+    "hw_type", p9n_interface::HW_NAME::DUALSENSE);
 
   try {
     this->hw_type_ = p9n_interface::getHwType(hw_name);

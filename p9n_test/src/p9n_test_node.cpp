@@ -20,7 +20,7 @@ PlayStationTestNode::PlayStationTestNode(const rclcpp::NodeOptions & options)
 : rclcpp::Node("p9n_test_node", options)
 {
   const std::string hw_name = this->declare_parameter<std::string>(
-    "controller_type", p9n_interface::HW_NAME::DUALSENSE);
+    "hw_type", p9n_interface::HW_NAME::DUALSENSE);
 
   try {
     this->hw_type_ = p9n_interface::getHwType(hw_name);
