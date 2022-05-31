@@ -7,7 +7,7 @@
       },
       "includePath": [
         "/opt/ros/galactic/include/**",
-        "/usr/include/**".
+        "/usr/include/**",
         "{workspaceFolder}/p9n_interface/include/**",
         "{workspaceFolder}/p9n_example/include/**",
         "{workspaceFolder}/p9n_test/include/**"
