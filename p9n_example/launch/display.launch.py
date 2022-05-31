@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from launch import LaunchDescription
-from launch_ros.actions import ComposableNodeContainer
+from launch_ros.actions import ComposableNodeContainer, Node
 from launch_ros.descriptions import ComposableNode
 
 
@@ -31,11 +31,11 @@ def generate_launch_description():
                     plugin='joy::Joy',
                     name='joy',
                 ),
-                ComposableNode(
-                    package='p9n_test',
-                    plugin='p9n_test::PlayStationTestNode',
-                    name='p9n_test'
-                ),
-            ])]
+            ]),
+        Node(
+            name='display_node',
+            package='p9n_example',
+            executable='display_node_exec'),
+    ]
 
     return LaunchDescription(nodes)

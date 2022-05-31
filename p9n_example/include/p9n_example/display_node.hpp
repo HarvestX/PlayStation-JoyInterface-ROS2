@@ -19,29 +19,24 @@
 #include <sensor_msgs/msg/joy.hpp>
 #include <rclcpp/rclcpp.hpp>
 
-#include "p9n_test/workflow_handler.hpp"
 #include <p9n_interface/p9n_interface.hpp>
 
-namespace p9n_test
+
+namespace p9n_example
 {
-class PlayStationTestNode : public rclcpp::Node
+class DisplayNode : public rclcpp::Node
 {
 private:
   p9n_interface::HW_TYPE hw_type_;
-  int max_trial_;
-
-  std::unique_ptr<WorkflowHandler> wf_handler_;
-  std::unique_ptr<
-    p9n_interface::PlayStationInterface> p9n_interface_;
+  std::unique_ptr<p9n_interface::PlayStationInterface> p9n_if_;
 
   rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joy_sub_;
 
 public:
-  explicit PlayStationTestNode(const rclcpp::NodeOptions &);
+  explicit DisplayNode(const rclcpp::NodeOptions &);
   void onJoy(sensor_msgs::msg::Joy::ConstSharedPtr);
-
 };
-}  // namespace p9n_test
+}  // namespace p9n_example
 
 #include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(p9n_test::PlayStationTestNode)
+RCLCPP_COMPONENTS_REGISTER_NODE(p9n_example::DisplayNode)

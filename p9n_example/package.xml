@@ -1,16 +1,17 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>p9n_interface</name>
+  <name>p9n_example</name>
   <version>0.0.0</version>
-  <description>PlayStation JoyController Interface</description>
+  <description>PlayStation JoyInterface example package.</description>
   <maintainer email="m12watanabe1a@gmail.com">m12watanabe1a</maintainer>
   <license>Apache License 2.0</license>
 
   <buildtool_depend>ament_cmake_auto</buildtool_depend>
 
-  <depend>rclcpp</depend>
-  <depend>sensor_msgs</depend>
+  <depend>rclcpp_components</depend>
+  <depend>p9n_interface</depend>
+  <exec_depend>joy</exec_depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>
