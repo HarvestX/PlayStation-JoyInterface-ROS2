@@ -59,3 +59,10 @@ void Example::onJoyCallback(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg) {
 | Right Stick ↑ ↓ | `float` | `tiltedStickRY();`    | `-1.0`  : Down,  `1.0`  : Up                                      |
 | R2              | `float` | `pressedR2Analog();`  | `-1.0` : Pressed, `1.0` : Not pressed                             |
 | L2              | `float` | `pressedL2Analog();`  | `-1.0`  : Pressed,  `1.0`  : Not pressed                          |
+
+
+
+## Acknowledgements
+We acknowledge attribute and gratitude to the following resources in creating this package.
+
+- [ps_ros2_common](https://github.com/Ar-Ray-code/ps_ros2_common) by @Ar-Ray-code
