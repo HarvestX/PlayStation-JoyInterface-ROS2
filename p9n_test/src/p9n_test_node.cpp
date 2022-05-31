@@ -16,7 +16,7 @@
 
 namespace p9n_test
 {
-PlayStationTest::PlayStationTest(const rclcpp::NodeOptions & options)
+PlayStationTestNode::PlayStationTestNode(const rclcpp::NodeOptions & options)
 : rclcpp::Node("p9n_test_node", options)
 {
   const std::string hw_name = this->declare_parameter<std::string>(
@@ -48,7 +48,7 @@ PlayStationTest::PlayStationTest(const rclcpp::NodeOptions & options)
 
   this->joy_sub_ = this->create_subscription<sensor_msgs::msg::Joy>(
     "joy", rclcpp::SensorDataQoS(rclcpp::KeepLast(1)),
-    std::bind(&PlayStationTest::onJoy, this, std::placeholders::_1));
+    std::bind(&PlayStationTestNode::onJoy, this, std::placeholders::_1));
 
   this->wf_handler_ = std::make_unique<WorkflowHandler>();
   this->p9n_interface_ =
@@ -64,7 +64,7 @@ PlayStationTest::PlayStationTest(const rclcpp::NodeOptions & options)
   }
 }
 
-void PlayStationTest::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
+void PlayStationTestNode::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
 {
   this->p9n_interface_->setJoyMsg(joy_msg);
   this->wf_handler_->explainNextTask(true);

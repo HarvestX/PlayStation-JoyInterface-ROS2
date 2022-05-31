@@ -7,10 +7,9 @@
       },
       "includePath": [
         "/opt/ros/galactic/include/**",
-        "/usr/include/**".
-        "{workspaceFolder}/p9n_interface/include/**",
-        "{workspaceFolder}/p9n_example/include/**",
-        "{workspaceFolder}/p9n_test/include/**"
+        "/usr/include/**",
+        "${workspaceFolder}/include/**",
+        "${workspaceFolder}/../p9n_interface/include/**"
       ],
       "name": "ROS",
       "intelliSenseMode": "clang-x64",
