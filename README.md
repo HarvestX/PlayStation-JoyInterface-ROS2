@@ -4,18 +4,18 @@ PlayStation Joy Controller Interface Package for ROS2.
 
 ## Supported controllers
 
-| Status | Hardware Name |
-| ------ | ------------- |
+| Status               | Hardware Name |
+| -------------------- | ------------- |
 | :white_large_square: | `DualShock3`  |
 | :white_large_square: | `DualShock4`  |
-| :heavy_check_mark: | `Dualsense`   |
+| :heavy_check_mark:   | `DualSense`   |
 
 
 ## How to use the interface library
 1. Initialize controller interface with the specific hardware type.
 ```cpp
 // Initialize Interface
-const std::string hw_type = "Dualsense";
+const std::string hw_type = "DualSense";
 ps_interface =
   std::make_unique<p9n_interface::PlayStationInterface>(hw_type);
 ```

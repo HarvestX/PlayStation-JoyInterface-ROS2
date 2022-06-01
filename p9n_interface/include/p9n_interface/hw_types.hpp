@@ -30,6 +30,6 @@ namespace HW_NAME
 {
 const char DUALSHOCK3[] = "DualShock3";
 const char DUALSHOCK4[] = "DualShock4";
-const char DUALSENSE[] = "Dualsense";
+const char DUALSENSE[] = "DualSense";
 }  // namespace HW_NAME
 }  // namespace p9n_interface
