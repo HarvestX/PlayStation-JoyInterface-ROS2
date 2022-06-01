@@ -16,5 +16,32 @@
 
 namespace p9n_interface
 {
-// TODO: Implement it
+enum class BUTTONS_DUALSHOCK3
+{
+  CROSS = 0,
+  CIRCLE,
+  TRIANGLE,
+  SQUARE,
+  L1,
+  R1,
+  L2,
+  R2,
+  SELECT,
+  START,
+  PS,
+  UP = 13,
+  DOWN,
+  LEFT,
+  RIGHT
+};
+
+enum class AXES_DUALSHOCK3
+{
+  STICK_LX = 0,
+  STICK_LY,
+  L2,
+  STICK_RX,
+  STICK_RY,
+  R2
+};
 }  // namespace p9n_interface
