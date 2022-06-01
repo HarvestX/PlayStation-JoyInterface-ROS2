@@ -28,7 +28,7 @@ def generate_launch_description():
     launch_args = [
         DeclareLaunchArgument(
             'hw_type',
-            default_value=TextSubstitution(text='Dualsense')
+            default_value=TextSubstitution(text='DualSense')
         )
     ]
     nodes = [
