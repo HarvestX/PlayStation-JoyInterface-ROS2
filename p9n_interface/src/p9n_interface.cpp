@@ -69,7 +69,58 @@ PlayStationInterface::PlayStationInterface(
 
   switch (this->HW_TYPE_) {
     case HW_TYPE::DUALSHOCK3:
-      throw std::runtime_error("DualShock3 not supported yet.");
+      {
+        using BTN_IDX = BUTTONS_DUALSHOCK3;
+        using AXES_IDX = AXES_DUALSHOCK3;
+
+        this->btn_idx_->cross =
+          static_cast<size_t>(BTN_IDX::CROSS);
+        this->btn_idx_->circle =
+          static_cast<size_t>(BTN_IDX::CIRCLE);
+        this->btn_idx_->triangle =
+          static_cast<size_t>(BTN_IDX::TRIANGLE);
+        this->btn_idx_->square =
+          static_cast<size_t>(BTN_IDX::SQUARE);
+
+        this->btn_idx_->L1 =
+          static_cast<size_t>(BTN_IDX::L1);
+        this->btn_idx_->R1 =
+          static_cast<size_t>(BTN_IDX::R1);
+        this->btn_idx_->L2 =
+          static_cast<size_t>(BTN_IDX::L2);
+        this->btn_idx_->R2 =
+          static_cast<size_t>(BTN_IDX::R2);
+
+        this->btn_idx_->select =
+          static_cast<size_t>(BTN_IDX::SELECT);
+        this->btn_idx_->start =
+          static_cast<size_t>(BTN_IDX::START);
+        this->btn_idx_->PS =
+          static_cast<size_t>(BTN_IDX::PS);
+
+        this->btn_idx_->dpad_up =
+          static_cast<size_t>(BTN_IDX::UP);
+        this->btn_idx_->dpad_down =
+          static_cast<size_t>(BTN_IDX::DOWN);
+        this->btn_idx_->dpad_right =
+          static_cast<size_t>(BTN_IDX::RIGHT);
+        this->btn_idx_->dpad_left =
+          static_cast<size_t>(BTN_IDX::LEFT);
+
+        this->axes_idx_->stick_lx =
+          static_cast<size_t>(AXES_IDX::STICK_LX);
+        this->axes_idx_->stick_ly =
+          static_cast<size_t>(AXES_IDX::STICK_LY);
+        this->axes_idx_->stick_rx =
+          static_cast<size_t>(AXES_IDX::STICK_RX);
+        this->axes_idx_->stick_ry =
+          static_cast<size_t>(AXES_IDX::STICK_RY);
+        this->axes_idx_->R2_analog =
+          static_cast<size_t>(AXES_IDX::R2);
+        this->axes_idx_->L2_analog =
+          static_cast<size_t>(AXES_IDX::L2);
+        break;
+      }
     case HW_TYPE::DUALSHOCK4:
       throw std::runtime_error("DualShock4 not supported yet.");
     case HW_TYPE::DUALSENSE:
@@ -289,9 +340,9 @@ float PlayStationInterface::pressedDPadX()
   }
   switch (this->HW_TYPE_) {
     case HW_TYPE::DUALSHOCK3:
-      if (this->joy_->buttons.at(this->btn_idx_->dpad_up)) {
+      if (this->joy_->buttons.at(this->btn_idx_->dpad_left)) {
         return 1.0;
-      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_down)) {
+      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_right)) {
         return -1.0;
       } else {
         return 0.0;
@@ -312,9 +363,9 @@ float PlayStationInterface::pressedDPadY()
   }
   switch (this->HW_TYPE_) {
     case HW_TYPE::DUALSHOCK3:
-      if (this->joy_->buttons.at(this->btn_idx_->dpad_right)) {
+      if (this->joy_->buttons.at(this->btn_idx_->dpad_down)) {
         return -1.0;
-      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_left)) {
+      } else if (this->joy_->buttons.at(this->btn_idx_->dpad_up)) {
         return 1.0;
       } else {
         return 0.0;
