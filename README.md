@@ -6,7 +6,7 @@ PlayStation Joy Controller Interface Package for ROS2.
 
 | Status               | Hardware Name |
 | -------------------- | ------------- |
-| :white_large_square: | `DualShock3`  |
+| :heavy_check_mark: | `DualShock3`  |
 | :white_large_square: | `DualShock4`  |
 | :heavy_check_mark:   | `DualSense`   |
 
