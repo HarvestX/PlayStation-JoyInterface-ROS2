@@ -1,3 +1,5 @@
+[![lint](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/lint.yml/badge.svg)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/lint.yml)
+
 # PlayStation-JoyInterface-ROS2
 PlayStation Joy Controller Interface Package for ROS2.
 
@@ -54,7 +56,7 @@ void Example::onJoyCallback(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg) {
 | DPad ← →        | `float` | `pressedDPadX();`     | `-1.0` : Right, `1.0` : Left                                      |
 | DPad ↑ ↓        | `float` | `pressedDPadY();`     | `-1.0`  : Down,  `1.0`  : Up                                      |
 | Left Stick ← →  | `float` | `tiltedStickLX();`    | `-1.0`  : Right,  `1.0`  : Left                                   |
-| Left Stick ↑ ↓  | `float` | tiltedStickLY();`     | `-1.0`  : Down,  `1.0`  : Up                                      |
+| Left Stick ↑ ↓  | `float` | `tiltedStickLY();`    | `-1.0`  : Down,  `1.0`  : Up                                      |
 | Right Stick ← → | `float` | `tiltedStickRX();`    | `-1.0`  : Right,  `1.0`  : Left                                   |
 | Right Stick ↑ ↓ | `float` | `tiltedStickRY();`    | `-1.0`  : Down,  `1.0`  : Up                                      |
 | R2              | `float` | `pressedR2Analog();`  | `-1.0` : Pressed, `1.0` : Not pressed                             |
