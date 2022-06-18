@@ -122,7 +122,53 @@ PlayStationInterface::PlayStationInterface(
         break;
       }
     case HW_TYPE::DUALSHOCK4:
-      throw std::runtime_error("DualShock4 not supported yet.");
+      {
+        using BTN_IDX = BUTTONS_DUALSHOCK4;
+        using AXES_IDX = AXES_DUALSHOCK4;
+
+        this->btn_idx_->cross =
+          static_cast<size_t>(BTN_IDX::CROSS);
+        this->btn_idx_->circle =
+          static_cast<size_t>(BTN_IDX::CIRCLE);
+        this->btn_idx_->triangle =
+          static_cast<size_t>(BTN_IDX::TRIANGLE);
+        this->btn_idx_->square =
+          static_cast<size_t>(BTN_IDX::SQUARE);
+
+        this->btn_idx_->L1 =
+          static_cast<size_t>(BTN_IDX::L1);
+        this->btn_idx_->R1 =
+          static_cast<size_t>(BTN_IDX::R1);
+        this->btn_idx_->L2 =
+          static_cast<size_t>(BTN_IDX::L2);
+        this->btn_idx_->R2 =
+          static_cast<size_t>(BTN_IDX::R2);
+
+        this->btn_idx_->select =
+          static_cast<size_t>(BTN_IDX::SELECT);
+        this->btn_idx_->start =
+          static_cast<size_t>(BTN_IDX::START);
+        this->btn_idx_->PS =
+          static_cast<size_t>(BTN_IDX::PS);
+
+        this->axes_idx_->stick_lx =
+          static_cast<size_t>(AXES_IDX::STICK_LX);
+        this->axes_idx_->stick_ly =
+          static_cast<size_t>(AXES_IDX::STICK_LY);
+        this->axes_idx_->stick_rx =
+          static_cast<size_t>(AXES_IDX::STICK_RX);
+        this->axes_idx_->stick_ry =
+          static_cast<size_t>(AXES_IDX::STICK_RY);
+        this->axes_idx_->R2_analog =
+          static_cast<size_t>(AXES_IDX::R2);
+        this->axes_idx_->L2_analog =
+          static_cast<size_t>(AXES_IDX::L2);
+        this->axes_idx_->d_pad_x =
+          static_cast<size_t>(AXES_IDX::DPAD_X);
+        this->axes_idx_->d_pad_y =
+          static_cast<size_t>(AXES_IDX::DPAD_Y);
+        break;
+      }
     case HW_TYPE::DUALSENSE:
       {
         using BTN_IDX = BUTTONS_DUALSENSE;
@@ -348,6 +394,8 @@ float PlayStationInterface::pressedDPadX()
         return 0.0;
       }
     case HW_TYPE::DUALSHOCK4:
+      return this->joy_->axes.at(
+        this->axes_idx_->d_pad_x);
     case HW_TYPE::DUALSENSE:
       return this->joy_->axes.at(
         this->axes_idx_->d_pad_x);
@@ -371,6 +419,8 @@ float PlayStationInterface::pressedDPadY()
         return 0.0;
       }
     case HW_TYPE::DUALSHOCK4:
+      return this->joy_->axes.at(
+        this->axes_idx_->d_pad_y);
     case HW_TYPE::DUALSENSE:
       return this->joy_->axes.at(
         this->axes_idx_->d_pad_y);
