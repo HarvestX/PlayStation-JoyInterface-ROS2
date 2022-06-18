@@ -16,5 +16,31 @@
 
 namespace p9n_interface
 {
-// TODO: Implement it
+enum class BUTTONS_DUALSHOCK4
+{
+  CROSS = 0,
+  CIRCLE,
+  TRIANGLE,
+  SQUARE,
+  L1,
+  R1,
+  L2,
+  R2,
+  SELECT,
+  START,
+  PS
+};
+
+enum class AXES_DUALSHOCK4
+{
+  STICK_LX = 0,
+  STICK_LY,
+  L2,
+  STICK_RX,
+  STICK_RY,
+  R2,
+  DPAD_X,
+  DPAD_Y,
+};
+
 }  // namespace p9n_interface
