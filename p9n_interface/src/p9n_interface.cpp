@@ -484,4 +484,4 @@ float PlayStationInterface::pressedL2Analog()
 }
 
 
-}  // namespace p9n_interfaceDualShock4
+}  // namespace p9n_interface
