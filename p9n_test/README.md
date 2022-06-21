@@ -14,5 +14,4 @@ You can select your own Hardware via `hw_type` parameter.
 And this repository supports following hardware.
 - `DualShock3`
 - `DualShock4`
-- `Dual
-- Sense`
+- `DualSense`
