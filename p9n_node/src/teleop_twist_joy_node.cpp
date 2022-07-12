@@ -60,20 +60,42 @@ TeleopTwistJoyNode::TeleopTwistJoyNode(const rclcpp::NodeOptions & options)
 void TeleopTwistJoyNode::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
 {
   this->p9n_if_->setJoyMsg(joy_msg);
+
+  if (this->p9n_if_->pressedR1()) {
+    speed_factor_ = speed_factor_ * 1.1;
+    RCLCPP_INFO(
+      this->get_logger(),
+      "Max speed: %.3f", speed_factor_);
+  }
+  if (this->p9n_if_->pressedL1()) {
+    speed_factor_ = speed_factor_ * 0.9;
+    RCLCPP_INFO(
+      this->get_logger(),
+      "Max speed: %.3f", speed_factor_);
+  }
+
+  auto twist = geometry_msgs::msg::Twist();
   if (
     std::abs(this->p9n_if_->tiltedStickLX()) > 1e-2 ||
     std::abs(this->p9n_if_->tiltedStickLY()) > 1e-2)
   {
-    float l_x = this->p9n_if_->tiltedStickLX();
     float l_y = this->p9n_if_->tiltedStickLY();
+    float l_x = this->p9n_if_->tiltedStickLX();
 
-    auto twist = geometry_msgs::msg::Twist();
-    twist.linear.x = l_y;
-    twist.angular.z = l_x;
+    twist.linear.x = speed_factor_ * l_y;
+    twist.angular.z = M_PI * speed_factor_ * l_x;
+
     this->twist_pub_->publish(twist);
+
+    // never wait for chattering for this scheme
+    return;
   } else {
-    using namespace std::chrono_literals;
-    rclcpp::sleep_for(100ms);
+    twist.linear.x = 0.0;
+    twist.angular.z = 0.0;
+    this->twist_pub_->publish(twist);
   }
+
+  using namespace std::chrono_literals;
+  rclcpp::sleep_for(200ms);
 }
-} // namespace p9n_node
+}  // namespace p9n_node

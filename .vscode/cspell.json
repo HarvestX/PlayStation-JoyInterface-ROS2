@@ -13,6 +13,7 @@
     "urdf",
     "bringup",
     "dualsense",
-    "dualshock"
+    "dualshock",
+    "teleop"
   ]
 }
