@@ -28,6 +28,8 @@ namespace p9n_node
 class TeleopTwistJoyNode : public rclcpp::Node
 {
 private:
+  float speed_factor_ = 1.0;
+
   p9n_interface::HW_TYPE hw_type_;
   std::unique_ptr<p9n_interface::PlayStationInterface> p9n_if_;
 
