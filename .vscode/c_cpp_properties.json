@@ -1,23 +1,24 @@
 {
-  "configurations": [
-    {
-      "browse": {
-        "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
-        "limitSymbolsToIncludedHeaders": false
-      },
-      "includePath": [
-        "/opt/ros/galactic/include/**",
-        "/usr/include/**",
-        "{workspaceFolder}/p9n_interface/include/**",
-        "{workspaceFolder}/p9n_example/include/**",
-        "{workspaceFolder}/p9n_test/include/**"
-      ],
-      "name": "ROS",
-      "intelliSenseMode": "clang-x64",
-      "compilerPath": "/usr/bin/gcc",
-      "cStandard": "c99",
-      "cppStandard": "c++17"
-    }
-  ],
-  "version": 4
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "${workspaceFolder}/.vscode/browse.vc.db",
+                "limitSymbolsToIncludedHeaders": false
+            },
+            "includePath": [
+                "/opt/ros/galactic/include/**",
+                "/usr/include/**",
+                "{workspaceFolder}/p9n_interface/include/**",
+                "{workspaceFolder}/p9n_example/include/**",
+                "{workspaceFolder}/p9n_test/include/**",
+                "${workspaceFolder}/p9n_node/include/**"
+            ],
+            "name": "ROS",
+            "intelliSenseMode": "clang-x64",
+            "compilerPath": "/usr/bin/gcc",
+            "cStandard": "c99",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
 }
