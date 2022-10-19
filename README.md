@@ -58,8 +58,10 @@ void Example::onJoyCallback(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg) {
 | DPad ↑ ↓        | `float` | `pressedDPadY();`     | `-1.0`  : Down,  `1.0`  : Up                                      |
 | Left Stick ← →  | `float` | `tiltedStickLX();`    | `-1.0`  : Right,  `1.0`  : Left                                   |
 | Left Stick ↑ ↓  | `float` | `tiltedStickLY();`    | `-1.0`  : Down,  `1.0`  : Up                                      |
+| Left Stick      | `bool`  | `isTiltedL();`        | Return `true` when L stick is tilted                              |
 | Right Stick ← → | `float` | `tiltedStickRX();`    | `-1.0`  : Right,  `1.0`  : Left                                   |
 | Right Stick ↑ ↓ | `float` | `tiltedStickRY();`    | `-1.0`  : Down,  `1.0`  : Up                                      |
+| Right Stick     | `bool`  | `tiltedStickRY();`    | Return `true` when R stick is tiled                               |
 | R2              | `float` | `pressedR2Analog();`  | `-1.0` : Pressed, `1.0` : Not pressed                             |
 | L2              | `float` | `pressedL2Analog();`  | `-1.0`  : Pressed,  `1.0`  : Not pressed                          |
 
