@@ -76,6 +76,7 @@ private:
 
 private:
   bool isAvailable();
+  bool isTilted(const size_t, const double = 1e-1);
 
 public:
   explicit PlayStationInterface(const HW_TYPE);
@@ -107,8 +108,11 @@ public:
 
   float tiltedStickLX();
   float tiltedStickLY();
+  bool isTiltedStickL();
+
   float tiltedStickRX();
   float tiltedStickRY();
+  bool isTiltedStickR();
 
   float pressedR2Analog();
   float pressedL2Analog();
