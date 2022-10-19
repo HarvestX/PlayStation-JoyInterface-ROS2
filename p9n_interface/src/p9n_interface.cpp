@@ -235,6 +235,11 @@ bool PlayStationInterface::isAvailable()
   return false;
 }
 
+bool PlayStationInterface::isTilted(const size_t idx, const double threshold)
+{
+  return std::abs(this->joy_->axes.at(idx)) > threshold;
+}
+
 void PlayStationInterface::setJoyMsg(sensor_msgs::msg::Joy::ConstSharedPtr msg)
 {
   this->joy_ = msg;
@@ -255,7 +260,7 @@ bool PlayStationInterface::pressedAny()
       pressed |= this->joy_->axes.at(i) < 0.0;
       continue;
     }
-    pressed |= std::abs(this->joy_->axes.at(i)) > 1e-1;
+    pressed |= this->isTilted(i);
   }
   return pressed;
 }
@@ -447,6 +452,16 @@ float PlayStationInterface::tiltedStickLY()
     this->axes_idx_->stick_ly);
 }
 
+bool PlayStationInterface::isTiltedStickL()
+{
+  if (!this->isAvailable()) {
+    return false;
+  }
+
+  return this->isTilted(this->axes_idx_->stick_lx) ||
+         this->isTilted(this->axes_idx_->stick_ly);
+}
+
 float PlayStationInterface::tiltedStickRX()
 {
   if (!this->isAvailable()) {
@@ -463,6 +478,16 @@ float PlayStationInterface::tiltedStickRY()
   }
   return this->joy_->axes.at(
     this->axes_idx_->stick_ry);
+}
+
+bool PlayStationInterface::isTiltedStickR()
+{
+  if (!this->isAvailable()) {
+    return false;
+  }
+
+  return this->isTilted(this->axes_idx_->stick_rx) ||
+         this->isTilted(this->axes_idx_->stick_ry);
 }
 
 float PlayStationInterface::pressedR2Analog()
