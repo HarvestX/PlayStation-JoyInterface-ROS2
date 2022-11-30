@@ -14,6 +14,9 @@
 
 #pragma once
 
+#include <string>
+#include <memory>
+
 #include "p9n_interface/hw_types.hpp"
 
 #include "p9n_interface/ps3_dualshock3.hpp"
@@ -49,7 +52,6 @@ typedef struct
 
 typedef struct
 {
-
   size_t d_pad_x;
   size_t d_pad_y;
   size_t stick_lx;
@@ -67,6 +69,9 @@ HW_TYPE getHwType(const std::string & hw_name);
 
 class PlayStationInterface
 {
+public:
+  using UniquePtr = std::unique_ptr<PlayStationInterface>;
+
 private:
   HW_TYPE HW_TYPE_;
   sensor_msgs::msg::Joy::ConstSharedPtr joy_;
