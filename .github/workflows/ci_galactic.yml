@@ -28,8 +28,6 @@ jobs:
       - uses: actions/checkout@v2
       - name: Install dependencies
         run: sudo apt-get update && sudo apt-get install -y wget python3-vcstool python3-colcon-coveragepy-result
-      - name: SSH2HTTPS
-        run: sed -e 's/git@github.com:/https:\/\/github.com\//g' mg400.repos > tmp.repos
       - name: Build and Test
         uses: ros-tooling/action-ros-ci@v0.2
         with:
