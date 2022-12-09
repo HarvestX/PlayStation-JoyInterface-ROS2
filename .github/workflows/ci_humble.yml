@@ -1,0 +1,39 @@
+name: ci_humble
+
+on:
+  push:
+    branches:
+      - "main"
+  pull_request:
+    types: [opened, synchronize, labeled]
+
+jobs:
+  ci:
+    runs-on: ${{ matrix.os }}
+    if: |
+      ((github.event.action == 'labeled') &&
+        (github.event.label.name == 'TESTING')) ||
+      ((github.event.action == 'synchronize') &&
+        contains(github.event.pull_request.labels.*.name, 'TESTING')) ||
+      (github.ref == 'refs/heads/main')
+    container:
+      image: osrf/ros:${{ matrix.ros_distribution }}-desktop
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-22.04]
+        ros_distribution: [humble]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: sudo apt-get update && sudo apt-get install -y wget python3-vcstool python3-colcon-coveragepy-result
+      - name: Build and Test
+        uses: ros-tooling/action-ros-ci@v0.2
+        with:
+          target-ros2-distro: ${{ matrix.ros_distribution }}
+          import-token: ${{ secrets.GITHUB_TOKEN }}
+          package-name: |
+            p9n_interface
+            p9n_example
+            p9n_test
