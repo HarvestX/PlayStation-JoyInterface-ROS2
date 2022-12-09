@@ -17,7 +17,7 @@ PlayStation Joy Controller Interface Package for ROS2.
 | ROS2 Distro | Branch | Build status |
 | --- | --- | --- |
 | **galactic** | [`galactic`](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/tree/galactic) | [![Galactic CI](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_galactic.yml/badge.svg?branch=main)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_galactic.yml?branch=main)
-| **humble** | [`humble`](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/tree/humble) | [![Humble CI](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml/badge.svg?branch=main)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml?branch=humble)
+| **humble** | [`humble`](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/tree/humble) | [![Humble CI](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml/badge.svg?branch=main)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml?branch=main)
 
 
 ## How to use the interface library
