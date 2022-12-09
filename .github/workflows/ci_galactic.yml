@@ -37,4 +37,3 @@ jobs:
             p9n_interface
             p9n_example
             p9n_test
-          vcs-repo-file-url: tmp.repos
