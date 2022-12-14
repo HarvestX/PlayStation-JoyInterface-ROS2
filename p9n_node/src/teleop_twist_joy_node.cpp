@@ -72,8 +72,7 @@ void TeleopTwistJoyNode::onJoy(Joy::ConstSharedPtr joy_msg)
     this->twist_pub_->publish(std::move(twist_msg));
 
     stopped = false;
-  }
-  if (!stopped) {
+  } else if (!stopped) {
     // Stop cart
     auto twist_msg = std::make_unique<Twist>(rosidl_runtime_cpp::MessageInitialization::ZERO);
     this->twist_pub_->publish(std::move(twist_msg));
