@@ -12,6 +12,7 @@
     "rclcpp",
     "roboteq",
     "rosdistro",
+    "rosidl",
     "rviz",
     "teleop",
     "urdf",

@@ -27,20 +27,29 @@ namespace p9n_node
 {
 class TeleopTwistJoyNode : public rclcpp::Node
 {
+public:
+  using Twist = geometry_msgs::msg::Twist;
+  using Joy = sensor_msgs::msg::Joy;
+
 private:
   float speed_factor_ = 1.0;
+  double linear_max_speed_, angular_max_speed_;
 
   p9n_interface::HW_TYPE hw_type_;
   std::unique_ptr<p9n_interface::PlayStationInterface> p9n_if_;
 
-  rclcpp::Subscription<sensor_msgs::msg::Joy>::SharedPtr joy_sub_;
-  rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr twist_pub_;
+  rclcpp::Subscription<Joy>::SharedPtr joy_sub_;
+  rclcpp::Publisher<Twist>::SharedPtr twist_pub_;
+
+  rclcpp::TimerBase::SharedPtr timer_watchdog_;
 
 public:
-  TeleopTwistJoyNode(const rclcpp::NodeOptions & options);
-  void onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg);
+  TeleopTwistJoyNode() = delete;
+  explicit TeleopTwistJoyNode(const rclcpp::NodeOptions & options);
+  void onJoy(Joy::ConstSharedPtr joy_msg);
+  void onWatchdog();
 };
-}
+}  // namespace p9n_node
 
 #include "rclcpp_components/register_node_macro.hpp"
 RCLCPP_COMPONENTS_REGISTER_NODE(p9n_node::TeleopTwistJoyNode)

@@ -10,16 +10,14 @@ ament_auto_find_build_dependencies()
 
 # Display Node ======================================================
 set(TARGET teleop_twist_joy_node)
-ament_auto_add_library(
-  ${TARGET}
-    SHARED
-      src/${TARGET}.cpp)
+set(MY_LIB_NAME ${PROJECT_NAME}_${TARGET})
+ament_auto_add_library(${MY_LIB_NAME} SHARED src/${TARGET}.cpp)
 rclcpp_components_register_node(
-  ${TARGET}
-    PLUGIN "p9n_node::TeleopTwistJoyNode"
-    EXECUTABLE ${TARGET}_exec)
-# End Display Node ==================================================
+  ${MY_LIB_NAME}
+  PLUGIN "${PROJECT_NAME}::TeleopTwistJoyNode"
+  EXECUTABLE ${TARGET}_exec)
 
+# Testing ===========================================================
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
   set(ament_cmake_copyright_FOUND TRUE)
