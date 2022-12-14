@@ -1,5 +1,3 @@
-[![lint](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/lint.yml/badge.svg)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/lint.yml)
-
 # PlayStation-JoyInterface-ROS2
 PlayStation Joy Controller Interface Package for ROS2.
 
