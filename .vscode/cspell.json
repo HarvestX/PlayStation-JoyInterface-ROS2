@@ -10,12 +10,13 @@
     "dualshock",
     "m12watanabe1a",
     "rclcpp",
+    "remappings",
     "roboteq",
     "rosdistro",
     "rosidl",
     "rviz",
     "teleop",
     "urdf",
-    "xacro",
+    "xacro"
   ]
 }
