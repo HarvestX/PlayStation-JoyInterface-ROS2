@@ -3,7 +3,7 @@ name: ci_humble
 on:
   push:
     branches:
-      - "main"
+      - "humble"
   pull_request:
     types: [opened, synchronize, labeled]
 
@@ -15,7 +15,7 @@ jobs:
         (github.event.label.name == 'TESTING')) ||
       ((github.event.action == 'synchronize') &&
         contains(github.event.pull_request.labels.*.name, 'TESTING')) ||
-      (github.ref == 'refs/heads/main')
+      (github.ref == 'refs/heads/humble')
     container:
       image: osrf/ros:${{ matrix.ros_distribution }}-desktop
     timeout-minutes: 20
