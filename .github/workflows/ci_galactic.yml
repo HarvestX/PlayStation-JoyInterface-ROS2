@@ -11,11 +11,9 @@ jobs:
   ci:
     runs-on: ${{ matrix.os }}
     if: |
-      ((github.event.action == 'labeled') &&
-        (github.event.label.name == 'TESTING')) ||
-      ((github.event.action == 'synchronize') &&
-        contains(github.event.pull_request.labels.*.name, 'TESTING')) ||
-      (github.ref == 'refs/heads/galactic')
+      ((github.event.action == 'labeled') && (github.event.label.name == 'TESTING') && (github.base_ref == 'galactic' )) ||
+      ((github.event.action == 'synchronize') && (github.base_ref == 'galactic') && contains(github.event.pull_request.labels.*.name, 'TESTING')) ||
+      (github.ref_name == 'galactic')
     container:
       image: osrf/ros:${{ matrix.ros_distribution }}-desktop
     timeout-minutes: 20
