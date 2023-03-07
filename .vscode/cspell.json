@@ -4,11 +4,13 @@
   "words": [
     "bringup",
     "colcon",
+    "coveragepy",
     "distro",
     "dpad",
     "dualsense",
     "dualshock",
     "m12watanabe1a",
+    "osrf",
     "rclcpp",
     "remappings",
     "roboteq",
@@ -17,6 +19,7 @@
     "rviz",
     "teleop",
     "urdf",
+    "vcstool",
     "xacro"
   ]
 }
