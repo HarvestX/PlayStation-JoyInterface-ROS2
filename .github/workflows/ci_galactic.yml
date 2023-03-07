@@ -33,6 +33,7 @@ jobs:
           import-token: ${{ secrets.GITHUB_TOKEN }}
           package-name: |
             p9n_bringup
-            p9n_interface
             p9n_example
+            p9n_interface
+            p9n_node
             p9n_test
