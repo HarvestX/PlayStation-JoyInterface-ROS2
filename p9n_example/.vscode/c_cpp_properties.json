@@ -6,7 +6,7 @@
         "limitSymbolsToIncludedHeaders": false
       },
       "includePath": [
-        "/opt/ros/galactic/include/**",
+        "/opt/ros/humble/include/**",
         "/usr/include/**",
         "${workspaceFolder}/include/**",
         "${workspaceFolder}/../p9n_interface/include/**"
