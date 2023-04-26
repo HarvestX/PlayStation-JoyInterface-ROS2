@@ -11,6 +11,7 @@
                 "${workspaceFolder}/p9n_interface/include/**",
                 "${workspaceFolder}/p9n_example/include/**",
                 "${workspaceFolder}/p9n_test/include/**",
+                "${workspaceFolder}/p9n_tool/include/**",
                 "${workspaceFolder}/p9n_node/include/**"
             ],
             "name": "ROS",
