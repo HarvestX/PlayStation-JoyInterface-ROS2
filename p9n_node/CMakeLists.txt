@@ -17,6 +17,14 @@ rclcpp_components_register_node(
   PLUGIN "${PROJECT_NAME}::TeleopTwistJoyNode"
   EXECUTABLE ${TARGET}_exec)
 
+set(TARGET led_control_node)
+set(MY_LIB_NAME ${PROJECT_NAME}_${TARGET})
+ament_auto_add_library(${MY_LIB_NAME} SHARED src/${TARGET}.cpp)
+rclcpp_components_register_node(
+  ${MY_LIB_NAME}
+  PLUGIN "${PROJECT_NAME}::LedControlNode"
+  EXECUTABLE ${TARGET}_exec)
+
 # Testing ===========================================================
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)

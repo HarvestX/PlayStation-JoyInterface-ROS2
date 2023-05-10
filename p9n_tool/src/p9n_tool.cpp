@@ -20,14 +20,23 @@ PlayStationTool::PlayStationTool(
 )
 : LOGGER_(rclcpp::get_logger("PlayStationInterface"))
 {
-  FILE * fp;
-  fp = popen("find /sys/devices/ -name ps-controller-battery*", "r");
-  if (fp == NULL) {
+  if (!dualsense_init(&ds, dev_serial)) {
+    RCLCPP_ERROR(LOGGER_, "couldn't init");
   }
+}
+
+PlayStationTool::~PlayStationTool()
+{
+  dualsense_destroy(&ds);
 }
 
 void PlayStationTool::setLEDMsg(std_msgs::msg::ColorRGBA::ConstSharedPtr msg)
 {
-  this->color_ = msg;
+  uint8_t r = std::round(msg->r * 255);
+  uint8_t g = std::round(msg->g * 255);
+  uint8_t b = std::round(msg->b * 255);
+  uint8_t brightness = 255;
+
+  command_lightbar3(&ds, r, g, b, brightness);
 }
-}  // namespace p9n_interface
+}  // namespace p9n_tool

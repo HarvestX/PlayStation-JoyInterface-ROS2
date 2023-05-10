@@ -13,7 +13,7 @@
 // limitations under the License.
 
 
-#include "p9n_node/led_control.hpp"
+#include "p9n_node/led_control_node.hpp"
 
 namespace p9n_node
 {

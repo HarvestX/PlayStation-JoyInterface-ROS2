@@ -9,6 +9,8 @@
     "dpad",
     "dualsense",
     "dualshock",
+    "leds",
+    "lightbar",
     "m12watanabe1a",
     "osrf",
     "rclcpp",
@@ -18,6 +20,7 @@
     "rosidl",
     "rviz",
     "teleop",
+    "Touchpad",
     "urdf",
     "vcstool",
     "xacro"

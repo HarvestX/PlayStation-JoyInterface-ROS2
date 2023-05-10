@@ -12,32 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#pragma once
-
-#include <string>
-#include <memory>
-#include <cmath>
-
-#include <rclcpp/rclcpp.hpp>
-#include <std_msgs/msg/color_rgba.hpp>
-
-#include "p9n_utilities.hpp"
+#include <p9n_tool/crc32.hpp>
 
 namespace p9n_tool
 {
-class PlayStationTool
+uint32_t crc32_le(uint32_t crc, unsigned char const * p, size_t len)
 {
-public:
-  using UniquePtr = std::unique_ptr<PlayStationTool>;
-
-private:
-  const rclcpp::Logger LOGGER_;
-  const char * dev_serial = NULL;
-  struct dualsense ds;
-
-public:
-  explicit PlayStationTool();
-  ~PlayStationTool();
-  void setLEDMsg(std_msgs::msg::ColorRGBA::ConstSharedPtr);
-};
-}  // namespace p9n_tool
+  while (len--) {
+    crc ^= *p++;
+    crc = (crc >> 8) ^ tab[crc & 255];
+  }
+  return crc;
+}
+}  //namespace p9n_tool
