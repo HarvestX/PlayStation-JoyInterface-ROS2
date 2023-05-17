@@ -18,7 +18,7 @@ ament_auto_add_library(
   ./src/p9n_utilities.cpp
   ./src/crc32.cpp
 )
-target_link_libraries(${PROJECT_NAME} hidapi-libusb)
+target_link_libraries(${PROJECT_NAME} hidapi-hidraw)
 
 # End p9n tool =================================================
 if(BUILD_TESTING)
