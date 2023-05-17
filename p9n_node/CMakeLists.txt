@@ -17,6 +17,7 @@ rclcpp_components_register_node(
   PLUGIN "${PROJECT_NAME}::TeleopTwistJoyNode"
   EXECUTABLE ${TARGET}_exec)
 
+  # LED Node ======================================================
 set(TARGET led_control_node)
 set(MY_LIB_NAME ${PROJECT_NAME}_${TARGET})
 ament_auto_add_library(${MY_LIB_NAME} SHARED src/${TARGET}.cpp)

@@ -11,9 +11,9 @@
 
   <depend>rclcpp_components</depend>
   <depend>p9n_interface</depend>
+  <depend>p9n_tool</depend>
   <depend>geometry_msgs</depend>
   <exec_depend>joy</exec_depend>
-  <depend>p9n_tool</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

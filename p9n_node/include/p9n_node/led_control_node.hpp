@@ -30,14 +30,9 @@ public:
   using ColorRGBA = std_msgs::msg::ColorRGBA;
 
 private:
-  float speed_factor_ = 1.0;
-  double linear_max_speed_, angular_max_speed_;
-
   std::unique_ptr<p9n_tool::PlayStationTool> p9n_to_;
 
   rclcpp::Subscription<ColorRGBA>::SharedPtr led_sub_;
-
-  rclcpp::TimerBase::SharedPtr timer_watchdog_;
 
 public:
   LedControlNode() = delete;
