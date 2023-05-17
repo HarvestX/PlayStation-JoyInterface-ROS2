@@ -20,6 +20,17 @@ namespace p9n_node
 LedControlNode::LedControlNode(const rclcpp::NodeOptions & options)
 : rclcpp::Node("led_control_node", options)
 {
+  const std::string hw_name = this->declare_parameter<std::string>(
+    "hw_type", p9n_interface::HW_NAME::DUALSENSE);
+
+  if (p9n_interface::getHwType(hw_name) != p9n_interface::HW_TYPE::DUALSENSE) {
+    RCLCPP_ERROR(
+      this->get_logger(), "Please select %s",
+      p9n_interface::HW_NAME::DUALSENSE);
+    exit(EXIT_FAILURE);
+    return;
+  }
+
   this->p9n_to_ =
     std::make_unique<p9n_tool::PlayStationTool>();
 

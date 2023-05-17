@@ -19,6 +19,7 @@
 #include <std_msgs/msg/color_rgba.hpp>
 #include <rclcpp/rclcpp.hpp>
 
+#include <p9n_interface/p9n_interface.hpp>
 #include <p9n_tool/p9n_tool.hpp>
 
 
@@ -30,6 +31,7 @@ public:
   using ColorRGBA = std_msgs::msg::ColorRGBA;
 
 private:
+  p9n_interface::HW_TYPE hw_type_;
   std::unique_ptr<p9n_tool::PlayStationTool> p9n_to_;
 
   rclcpp::Subscription<ColorRGBA>::SharedPtr led_sub_;
