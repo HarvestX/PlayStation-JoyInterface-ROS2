@@ -17,6 +17,8 @@ PlayStation Joy Controller Interface Package for ROS2.
 | **galactic** | [`galactic`](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/tree/galactic) | [![Galactic CI](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_galactic.yml/badge.svg?branch=main)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_galactic.yml?branch=main)
 | **humble** | [`humble`](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/tree/humble) | [![Humble CI](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml/badge.svg?branch=main)](https://github.com/HarvestX/PlayStation-JoyInterface-ROS2/actions/workflows/ci_humble.yml?branch=main)
 
+## Dependencies
+- [hidapi](https://github.com/libusb/hidapi)
 
 ## How to use the interface library
 1. Initialize controller interface with the specific hardware type.
@@ -70,7 +72,16 @@ void Example::onJoyCallback(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg) {
 | R2              | `float` | `pressedR2Analog();`  | `-1.0` : Pressed, `1.0` : Not pressed                             |
 | L2              | `float` | `pressedL2Analog();`  | `-1.0`  : Pressed,  `1.0`  : Not pressed                          |
 
-
+## Control LED
+Only DualSense can control LEDs.
+### 1. Run LED control node
+```bash
+ros2 run p9n_node led_control_node_exec
+```
+### 2. Send topic
+```bash
+ros2 topic pub /color std_msgs/msg/ColorRGBA "{r: 1.0, g: 0.0, b: 0.0, a: 1.0}"
+```
 
 ## Acknowledgements
 We acknowledge attribute and gratitude to the following resources in creating this package.
