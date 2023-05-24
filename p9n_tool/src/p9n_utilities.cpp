@@ -159,13 +159,12 @@ bool dualsense_init(struct dualsense * ds, const char * serial)
   return ret;
 }
 
-void dualsense_destroy(struct dualsense * ds)
+void dualsense_close(struct dualsense * ds)
 {
   hid_close(ds->dev);
 }
 
-
-int command_lightbar1(struct dualsense * ds, char * state)
+int command_lightbar_state(struct dualsense * ds, char * state)
 {
   struct dualsense_output_report rp;
   uint8_t rbuf[DS_OUTPUT_REPORT_BT_SIZE];
@@ -186,7 +185,7 @@ int command_lightbar1(struct dualsense * ds, char * state)
   return 0;
 }
 
-int command_lightbar3(
+int command_lightbar_color(
   struct dualsense * ds, uint8_t red, uint8_t green, uint8_t blue,
   uint8_t brightness)
 {

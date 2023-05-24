@@ -27,7 +27,7 @@ PlayStationTool::PlayStationTool(
 
 PlayStationTool::~PlayStationTool()
 {
-  dualsense_destroy(&ds);
+  dualsense_close(&ds);
 }
 
 void PlayStationTool::setLEDMsg(std_msgs::msg::ColorRGBA::ConstSharedPtr msg)
@@ -37,6 +37,6 @@ void PlayStationTool::setLEDMsg(std_msgs::msg::ColorRGBA::ConstSharedPtr msg)
   uint8_t b = std::round(msg->b * 255);
   uint8_t brightness = std::round(msg->a * 255);
 
-  command_lightbar3(&ds, r, g, b, brightness);
+  command_lightbar_color(&ds, r, g, b, brightness);
 }
 }  // namespace p9n_tool

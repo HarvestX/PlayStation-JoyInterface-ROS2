@@ -193,11 +193,13 @@ bool compare_serial(const char * s, const wchar_t * dev);
 
 bool dualsense_init(struct dualsense * ds, const char * serial);
 
-void dualsense_destroy(struct dualsense * ds);
+void dualsense_close(struct dualsense * ds);
 
-int command_lightbar1(struct dualsense * ds, char * state);
+int command_power_off(struct dualsense * ds);
 
-int command_lightbar3(
+int command_lightbar_state(struct dualsense * ds, char * state);
+
+int command_lightbar_color(
   struct dualsense * ds, uint8_t red, uint8_t green, uint8_t blue,
   uint8_t brightness);
 
