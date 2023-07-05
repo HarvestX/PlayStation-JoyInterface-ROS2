@@ -100,7 +100,6 @@ void PlayStationTestNode::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
     }
   }
 
-
   if (this->wf_handler_->isDone()) {
     RCLCPP_INFO(this->get_logger(), "Done!");
     this->wf_handler_->showResult();
@@ -109,9 +108,12 @@ void PlayStationTestNode::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
   }
 
   // Delay for button chattering
-  using namespace std::chrono_literals;
+  using namespace std::chrono_literals;  // NOLINT
   rclcpp::sleep_for(500ms);
 }
 
 
 }  // namespace p9n_test
+
+#include "rclcpp_components/register_node_macro.hpp"
+RCLCPP_COMPONENTS_REGISTER_NODE(p9n_test::PlayStationTestNode)

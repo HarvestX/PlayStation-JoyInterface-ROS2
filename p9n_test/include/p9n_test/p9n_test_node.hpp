@@ -39,9 +39,5 @@ private:
 public:
   explicit PlayStationTestNode(const rclcpp::NodeOptions &);
   void onJoy(sensor_msgs::msg::Joy::ConstSharedPtr);
-
 };
 }  // namespace p9n_test
-
-#include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(p9n_test::PlayStationTestNode)

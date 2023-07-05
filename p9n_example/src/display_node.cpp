@@ -21,7 +21,6 @@ namespace p9n_example
 DisplayNode::DisplayNode(const rclcpp::NodeOptions & options)
 : rclcpp::Node("display_node", options)
 {
-
   const std::string hw_name = this->declare_parameter<std::string>(
     "hw_type", p9n_interface::HW_NAME::DUALSENSE);
 
@@ -162,8 +161,11 @@ void DisplayNode::onJoy(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg)
   }
 
   if (this->p9n_if_->pressedAny()) {
-    using namespace std::chrono_literals;
+    using namespace std::chrono_literals;  // NOLINT
     rclcpp::sleep_for(200ms);
   }
 }
 }  // namespace p9n_example
+
+#include "rclcpp_components/register_node_macro.hpp"
+RCLCPP_COMPONENTS_REGISTER_NODE(p9n_example::DisplayNode)
