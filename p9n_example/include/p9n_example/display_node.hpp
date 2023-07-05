@@ -16,11 +16,10 @@
 
 #include <string>
 #include <memory>
-#include <sensor_msgs/msg/joy.hpp>
-#include <rclcpp/rclcpp.hpp>
 
 #include <p9n_interface/p9n_interface.hpp>
-
+#include <rclcpp/rclcpp.hpp>
+#include <sensor_msgs/msg/joy.hpp>
 
 namespace p9n_example
 {
@@ -37,6 +36,3 @@ public:
   void onJoy(sensor_msgs::msg::Joy::ConstSharedPtr);
 };
 }  // namespace p9n_example
-
-#include "rclcpp_components/register_node_macro.hpp"
-RCLCPP_COMPONENTS_REGISTER_NODE(p9n_example::DisplayNode)
