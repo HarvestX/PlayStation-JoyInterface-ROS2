@@ -26,6 +26,10 @@ def generate_launch_description():
         'hw_type', default_value=TextSubstitution(text='DualSense'))
     topic_name_arg = DeclareLaunchArgument(
         'topic_name', default_value=TextSubstitution(text='cmd_vel'))
+    linear_speed_arg = DeclareLaunchArgument(
+        'linear_speed', default_value=TextSubstitution(text='0.2'))
+    angular_speed_arg = DeclareLaunchArgument(
+        'angular_speed', default_value=TextSubstitution(text='0.6'))
 
     joy_container = ComposableNodeContainer(
         name='joy_container',
@@ -45,7 +49,9 @@ def generate_launch_description():
                 name='teleop_twist_joy_node',
                 namespace='',
                 parameters=[{
-                        'hw_type': LaunchConfiguration('hw_type')
+                        'hw_type': LaunchConfiguration('hw_type'),
+                        'linear_speed': LaunchConfiguration('linear_speed'),
+                        'angular_speed': LaunchConfiguration('angular_speed')
                 }],
                 remappings=[
                     ('cmd_vel', LaunchConfiguration('topic_name'))
@@ -58,6 +64,8 @@ def generate_launch_description():
 
     ld.add_action(hw_type_arg)
     ld.add_action(topic_name_arg)
+    ld.add_action(linear_speed_arg)
+    ld.add_action(angular_speed_arg)
 
     ld.add_action(joy_container)
 
