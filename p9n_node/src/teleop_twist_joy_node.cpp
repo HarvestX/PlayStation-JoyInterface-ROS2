@@ -23,7 +23,7 @@ TeleopTwistJoyNode::TeleopTwistJoyNode(const rclcpp::NodeOptions & options)
   const std::string hw_name = this->declare_parameter<std::string>(
     "hw_type", p9n_interface::HW_NAME::DUALSENSE);
   this->linear_max_speed_ =
-    this->declare_parameter<double>("linear_speed", 0.2);
+    this->declare_parameter<double>("linear_speed", 0.9);
   this->angular_max_speed_ =
     this->declare_parameter<double>("angular_speed", 0.6);
 
@@ -64,15 +64,19 @@ void TeleopTwistJoyNode::onJoy(Joy::ConstSharedPtr joy_msg)
   this->timer_watchdog_->reset();
   this->p9n_if_->setJoyMsg(joy_msg);
 
+  const double PI = 3.14159;
   static bool stopped = true;
   if (this->p9n_if_->isTiltedStickL()) {
     auto twist_msg = std::make_unique<Twist>();
     twist_msg->linear.set__x(this->linear_max_speed_ * this->p9n_if_->tiltedStickLY());
 
-    if (twist_msg->linear.x > 0) {
+    if (this->p9n_if_->tiltedStickLY() > sin(PI / 8)) {
       twist_msg->angular.set__z(this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
-    } else {
+    } else if (this->p9n_if_->tiltedStickLY() < sin(-PI / 8)) {
       twist_msg->angular.set__z(-this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
+    } else {
+      twist_msg->linear.set__x(0.0);
+      twist_msg->angular.set__z(this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
     }
     this->twist_pub_->publish(std::move(twist_msg));
 
