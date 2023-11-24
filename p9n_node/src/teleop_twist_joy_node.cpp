@@ -23,7 +23,7 @@ TeleopTwistJoyNode::TeleopTwistJoyNode(const rclcpp::NodeOptions & options)
   const std::string hw_name = this->declare_parameter<std::string>(
     "hw_type", p9n_interface::HW_NAME::DUALSENSE);
   this->linear_max_speed_ =
-    this->declare_parameter<double>("linear_speed", 0.9);
+    this->declare_parameter<double>("linear_speed", 0.2);
   this->angular_max_speed_ =
     this->declare_parameter<double>("angular_speed", 0.6);
 
