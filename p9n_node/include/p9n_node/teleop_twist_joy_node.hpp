@@ -32,7 +32,6 @@ public:
   using Joy = sensor_msgs::msg::Joy;
 
 private:
-  float speed_factor_ = 1.0;
   double linear_max_speed_, angular_max_speed_;
 
   p9n_interface::HW_TYPE hw_type_;

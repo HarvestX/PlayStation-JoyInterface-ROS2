@@ -64,15 +64,14 @@ void TeleopTwistJoyNode::onJoy(Joy::ConstSharedPtr joy_msg)
   this->timer_watchdog_->reset();
   this->p9n_if_->setJoyMsg(joy_msg);
 
-  const double PI = 3.14159;
   static bool stopped = true;
   if (this->p9n_if_->isTiltedStickL()) {
     auto twist_msg = std::make_unique<Twist>();
     twist_msg->linear.set__x(this->linear_max_speed_ * this->p9n_if_->tiltedStickLY());
 
-    if (this->p9n_if_->tiltedStickLY() > sin(PI / 8)) {
+    if (this->p9n_if_->tiltedStickLY() > sin(M_PI * 0.125)) {
       twist_msg->angular.set__z(this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
-    } else if (this->p9n_if_->tiltedStickLY() < sin(-PI / 8)) {
+    } else if (this->p9n_if_->tiltedStickLY() < sin(-M_PI * 0.125)) {
       twist_msg->angular.set__z(-this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
     } else {
       twist_msg->linear.set__x(0.0);
