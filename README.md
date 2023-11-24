@@ -71,6 +71,11 @@ void Example::onJoyCallback(sensor_msgs::msg::Joy::ConstSharedPtr joy_msg) {
 | L2              | `float` | `pressedL2Analog();`  | `-1.0`  : Pressed,  `1.0`  : Not pressed                          |
 
 
+## Convert from Left Joy Stick to cmd_vel
+`teleop_twist_joy_node` has cmd_vel publisher.
+Velocity is decided as below.
+![Image](./media/joy2vel.png)
+
 
 ## Acknowledgements
 We acknowledge attribute and gratitude to the following resources in creating this package.

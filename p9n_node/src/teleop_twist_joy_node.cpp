@@ -69,10 +69,13 @@ void TeleopTwistJoyNode::onJoy(Joy::ConstSharedPtr joy_msg)
     auto twist_msg = std::make_unique<Twist>();
     twist_msg->linear.set__x(this->linear_max_speed_ * this->p9n_if_->tiltedStickLY());
 
-    if (twist_msg->linear.x > 0) {
+    if (this->p9n_if_->tiltedStickLY() > sin(M_PI * 0.125)) {
       twist_msg->angular.set__z(this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
-    } else {
+    } else if (this->p9n_if_->tiltedStickLY() < sin(-M_PI * 0.125)) {
       twist_msg->angular.set__z(-this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
+    } else {
+      twist_msg->linear.set__x(0.0);
+      twist_msg->angular.set__z(this->angular_max_speed_ * this->p9n_if_->tiltedStickLX());
     }
     this->twist_pub_->publish(std::move(twist_msg));
 
